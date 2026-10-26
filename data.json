@@ -1,22 +1,19 @@
 
 [
     {
-<<<<<<< HEAD
-        "id": 1,
-=======
-        "querry" : 0,
->>>>>>> 087f738c39aefcbd430c75619962a916f0443a5d
+        
+        "querry no. ": 20,
         "name": "terrich",
         "age": 21
     },
     {
-        "querry": 1,
-        "name": "ayush",
+        "querry no. ": 5,
+        "name": "hella",
         "age": 20
     },
     {
-        "id": 3,
-        "name": "sakshi",
+        "querry no. ": 0,
+        "name": "Dr. p",
         "age": 22
     }
 ]
