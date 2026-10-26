@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 from dotenv import load_dotenv
@@ -48,6 +48,8 @@ if not mongo_uri:
 client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
 db = client["flask_database"]
 collection = db["submissions"]
+todo_db = client["todo_database"]
+todo_collection = todo_db["todo_items"]
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -89,6 +91,25 @@ def form():
 @app.route("/success")
 def success():
     return render_template("success.html")
+
+
+@app.route("/submittodoitem", methods=["POST"])
+def submit_todo_item():
+    item_name = request.form.get("itemName")
+    item_description = request.form.get("itemDescription")
+
+    if not item_name or not item_description:
+        return jsonify({"error": "Both fields are required"}), 400
+
+    result = todo_collection.insert_one({
+        "itemName": item_name,
+        "itemDescription": item_description
+    })
+
+    return jsonify({
+        "message": "To-Do item submitted successfully",
+        "id": str(result.inserted_id)
+    }), 201
 
 @app.route("/exit")
 def exit() :
