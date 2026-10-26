@@ -90,6 +90,10 @@ def form():
 def success():
     return render_template("success.html")
 
+@app.route("/exit")
+def exit() :
+    return "thank you for visting"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
