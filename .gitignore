@@ -1,0 +1,5 @@
+git_github_tutorial-/
+.env
+.docx
+venv/
+__pycache__/
